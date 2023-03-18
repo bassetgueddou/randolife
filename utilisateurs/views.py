@@ -1,17 +1,19 @@
-from django.contrib.auth import views as auth_views
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView
 
 
-class InscriptionView(auth_views.CreateView):
-    template_name = "utilisateurs/inscriptions.html"
+class InscriptionView(CreateView):
+    template_name = "utilisateurs/inscription.html"
     form_class = UserCreationForm
-    succes_url = reverse_lazy("activites:index")
+    success_url = reverse_lazy("activites:index")
 
 
-class ConnexionView(auth_viewq.loginView):
+class ConnexionView(LoginView):
     template_name = "utilisateurs/connexion.html"
-    succes_url = reverse_lazy("activities:index")
+    success_url = reverse_lazy("activites:index")
 
 
-class DeconnexionView(auth_views.LoginView):
+class DeconnexionView(LogoutView):
     next_page = reverse_lazy("activites:index")

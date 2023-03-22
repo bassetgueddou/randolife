@@ -7,12 +7,13 @@ from django.utils.translation import gettext_lazy as _
 
 class Profil(models.Model):
     user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+        'utilisateurs.CustomUserModel', on_delete=models.CASCADE)
+
     bio = models.TextField(blank=True, null=True)
     interests = models.TextField(blank=True, null=True)
 
 
-class CustomUser(AbstractUser):
+class CustomUserModel(AbstractUser):
     date_naissance = models.DateField(null=True, blank=True)
     photo_profil = models.ImageField(
         upload_to='profil/', blank=True, null=True)
